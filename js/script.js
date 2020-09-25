@@ -19,5 +19,13 @@ function preventFormSubmit() {
 }
 
 function activateInput() {
+  function handleTyping(event) {
+    // console.log(event); para detectar o value da tecla Enter
+    if (event.key === 'Enter') {
+      console.log(event.target.value);
+    }
+  }
+
   inputName.focus();
+  inputName.addEventListener('keyup', handleTyping);
 }
