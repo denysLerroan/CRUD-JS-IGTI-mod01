@@ -38,10 +38,18 @@ function activateInput() {
 }
 
 function render() {
-  function createDeleteButton() {
+  function createDeleteButton(index) {
+    function deleteName() {
+      globalNames.splice(index, 1);
+      render();
+    }
+
     var button = document.createElement('button');
     button.classList.add('deleteButton'); // Adicionando classe CSS
     button.textContent = 'x';
+
+    //Adicionando o evento de exclusão ao botão
+    button.addEventListener('click', deleteName);
 
     return button;
   }
@@ -55,7 +63,7 @@ function render() {
     var currentName = globalNames[i];
 
     var li = document.createElement('li');
-    var button = createDeleteButton();
+    var button = createDeleteButton(i);
 
     var span = document.createElement('span');
     span.textContent = currentName;
