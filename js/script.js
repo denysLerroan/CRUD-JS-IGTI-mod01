@@ -8,6 +8,7 @@ function start() {
 
   preventFormSubmit();
   activateInput();
+  render();
 }
 
 function preventFormSubmit() {
@@ -28,9 +29,30 @@ function activateInput() {
     if (event.key === 'Enter') {
       // console.log(event.target.value); capturando o value
       insertName(event.target.value);
+      render();
     }
   }
 
   inputName.addEventListener('keyup', handleTyping);
   inputName.focus();
+}
+
+function render() {
+  var divNames = document.querySelector('#names');
+  divNames.innerHTML = '';
+
+  //Criar ul
+  // Criar n li's, conforme o tamanho do vetor globalNames
+
+  var ul = document.createElement('ul');
+
+  for (var i = 0; i < globalNames.length; i++) {
+    var currentName = globalNames[i];
+
+    var li = document.createElement('li');
+    li.textContent = currentName;
+    ul.appendChild(li);
+  }
+
+  divNames.appendChild(ul);
 }
