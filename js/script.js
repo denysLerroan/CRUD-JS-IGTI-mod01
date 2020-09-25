@@ -50,7 +50,14 @@ function render() {
     var currentName = globalNames[i];
 
     var li = document.createElement('li');
-    li.textContent = currentName;
+    var button = document.createElement('button');
+
+    var span = document.createElement('span');
+    span.textContent = currentName;
+
+    button.textContent = 'x';
+    li.appendChild(button);
+    li.appendChild(span);
     ul.appendChild(li);
   }
 
