@@ -50,12 +50,14 @@ function render() {
     var currentName = globalNames[i];
 
     var li = document.createElement('li');
+
     var button = document.createElement('button');
+    button.classList.add('deleteButton'); // Adicionando classe CSS
+    button.textContent = 'x';
 
     var span = document.createElement('span');
     span.textContent = currentName;
 
-    button.textContent = 'x';
     li.appendChild(button);
     li.appendChild(span);
     ul.appendChild(li);
