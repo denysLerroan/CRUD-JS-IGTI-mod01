@@ -38,11 +38,16 @@ function activateInput() {
 }
 
 function render() {
+  function createDeleteButton() {
+    var button = document.createElement('button');
+    button.classList.add('deleteButton'); // Adicionando classe CSS
+    button.textContent = 'x';
+
+    return button;
+  }
+
   var divNames = document.querySelector('#names');
   divNames.innerHTML = '';
-
-  //Criar ul
-  // Criar n li's, conforme o tamanho do vetor globalNames
 
   var ul = document.createElement('ul');
 
@@ -50,10 +55,7 @@ function render() {
     var currentName = globalNames[i];
 
     var li = document.createElement('li');
-
-    var button = document.createElement('button');
-    button.classList.add('deleteButton'); // Adicionando classe CSS
-    button.textContent = 'x';
+    var button = createDeleteButton();
 
     var span = document.createElement('span');
     span.textContent = currentName;
