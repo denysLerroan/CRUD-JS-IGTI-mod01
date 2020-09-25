@@ -19,13 +19,18 @@ function preventFormSubmit() {
 }
 
 function activateInput() {
+  function insertName(newName) {
+    globalNames.push(newName); //push adiciona na lista
+  }
+
   function handleTyping(event) {
     // console.log(event); para detectar o value da tecla Enter
     if (event.key === 'Enter') {
-      console.log(event.target.value);
+      // console.log(event.target.value); capturando o value
+      insertName(event.target.value);
     }
   }
 
-  inputName.focus();
   inputName.addEventListener('keyup', handleTyping);
+  inputName.focus();
 }
