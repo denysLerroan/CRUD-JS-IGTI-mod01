@@ -55,4 +55,10 @@ function render() {
   }
 
   divNames.appendChild(ul);
+  clearInput();
+}
+
+function clearInput() {
+  inputName.value = '';
+  inputName.focus();
 }
