@@ -2,6 +2,8 @@ window.addEventListener('load', start);
 
 var globalNames = ['Um', 'Dois', 'Três', 'Quatro'];
 var inputName = null;
+var currentIndex = null;
+var isEditing = false;
 
 function start() {
   inputName = document.querySelector('#inputName');
@@ -24,12 +26,20 @@ function activateInput() {
     globalNames.push(newName); //push adiciona na lista
   }
 
+  function updateName(newName) {
+    globalNames[currentIndex] = newName;
+  }
+
   function handleTyping(event) {
-    // console.log(event); para detectar o value da tecla Enter
     if (event.key === 'Enter') {
-      // console.log(event.target.value); capturando o value
-      insertName(event.target.value);
+      if (isEditing) {
+        updateName(event.target.value);
+      } else {
+        insertName(event.target.value);
+      }
       render();
+      isEditing = false;
+      clearInput();
     }
   }
 
@@ -43,15 +53,25 @@ function render() {
       globalNames.splice(index, 1);
       render();
     }
-
     var button = document.createElement('button');
     button.classList.add('deleteButton'); // Adicionando classe CSS
     button.textContent = 'x';
-
-    //Adicionando o evento de exclusão ao botão
     button.addEventListener('click', deleteName);
-
     return button;
+  }
+
+  function createSpan(name, index) {
+    function editItem() {
+      inputName.value = name;
+      inputName.focus();
+      isEditing = true;
+      currentIndex = index;
+    }
+    var span = document.createElement('span');
+    span.classList.add('clickable');
+    span.textContent = name;
+    span.addEventListener('click', editItem);
+    return span;
   }
 
   var divNames = document.querySelector('#names');
@@ -64,9 +84,7 @@ function render() {
 
     var li = document.createElement('li');
     var button = createDeleteButton(i);
-
-    var span = document.createElement('span');
-    span.textContent = currentName;
+    var span = createSpan(currentName, i);
 
     li.appendChild(button);
     li.appendChild(span);

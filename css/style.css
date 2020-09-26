@@ -10,7 +10,8 @@ li {
 .deleteButton {
   color: white;
   font-weight: bold;
-  background-color: darkred;
-  margin-right: 10px;
+  font-size: 1.2em;
+  background-color: rgb(255, 0, 0);
+  margin: 10px 10px 0px 0px;
   border-radius: 50%;
 }
