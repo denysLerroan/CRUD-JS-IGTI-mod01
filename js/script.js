@@ -60,23 +60,28 @@ function render() {
       render();
     }
     var button = document.createElement('button');
-    button.classList.add('deleteButton'); // Adicionando classe CSS
-    button.textContent = 'x';
+    button.classList.add('deleteButton', 'clickable'); // Adicionando classe CSS
+    button.textContent = '✂';
     button.addEventListener('click', deleteName);
     return button;
   }
-
-  function createSpan(name, index) {
+  function createUpdateButton(name, index) {
     function editItem() {
       inputName.value = name;
       inputName.focus();
       isEditing = true;
       currentIndex = index;
     }
+    var button = document.createElement('button');
+    button.classList.add('updateButton', 'clickable'); // Adicionando classe CSS
+    button.textContent = '✎';
+    button.addEventListener('click', editItem);
+    return button;
+  }
+
+  function createSpan(name) {
     var span = document.createElement('span');
-    span.classList.add('clickable');
     span.textContent = name;
-    span.addEventListener('click', editItem);
     return span;
   }
 
@@ -90,8 +95,10 @@ function render() {
 
     var li = document.createElement('li');
     var button = createDeleteButton(i);
-    var span = createSpan(currentName, i);
+    var editButton = createUpdateButton(currentName, i);
+    var span = createSpan(currentName);
 
+    li.appendChild(editButton);
     li.appendChild(button);
     li.appendChild(span);
     ul.appendChild(li);
